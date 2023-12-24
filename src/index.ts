@@ -39,7 +39,7 @@ app.post("/orders", async (req: Request, res: Response, next: NextFunction) => {
   try {
     const newOrder = new Order({
       ...req.body,
-      status: "На производстве",
+      status: "Принят",
       fullPrice: req.body.price,
     });
     const insertedOrder = await newOrder.save();
@@ -48,6 +48,19 @@ app.post("/orders", async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 });
+
+app.delete(
+  "/orders/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id = req.params.id;
+      const deletedOrder = await Order.findByIdAndDelete(id);
+      res.status(200).json(deletedOrder);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 const start = async () => {
   try {
