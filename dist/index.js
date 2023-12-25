@@ -59,6 +59,16 @@ app.delete("/orders/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, 
         next(error);
     }
 }));
+app.get("/orders/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id;
+        const foundOrder = yield order_1.Order.findById(id);
+        res.status(200).json(foundOrder);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose_1.default.connect(databaseUrl);

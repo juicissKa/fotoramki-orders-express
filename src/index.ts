@@ -62,6 +62,19 @@ app.delete(
   }
 );
 
+app.get(
+  "/orders/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id = req.params.id;
+      const foundOrder = await Order.findById(id);
+      res.status(200).json(foundOrder);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 const start = async () => {
   try {
     await mongoose.connect(databaseUrl);
