@@ -41,7 +41,7 @@ app.get("/orders", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 }));
 app.post("/orders", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newOrder = new order_1.Order(Object.assign(Object.assign({}, req.body), { status: "Принят", fullPrice: req.body.price }));
+        const newOrder = new order_1.Order(Object.assign(Object.assign({}, req.body), { status: "Принят", fullPrice: req.body.orderProps.price }));
         const insertedOrder = yield newOrder.save();
         res.status(201).json(insertedOrder);
     }

@@ -40,7 +40,7 @@ app.post("/orders", async (req: Request, res: Response, next: NextFunction) => {
     const newOrder = new Order({
       ...req.body,
       status: "Принят",
-      fullPrice: req.body.price,
+      fullPrice: req.body.orderProps.price,
     });
     const insertedOrder = await newOrder.save();
     res.status(201).json(insertedOrder);

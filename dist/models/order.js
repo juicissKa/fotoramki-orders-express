@@ -23,15 +23,7 @@ const PasseprtoutSchema = new mongoose_1.default.Schema({
         required: true,
     },
 }, { _id: false });
-const OrderSchema = new mongoose_1.default.Schema({
-    orderType: {
-        type: String,
-        required: true,
-    },
-    workName: {
-        type: String,
-        required: false,
-    },
+const OrderPropsSchema = new mongoose_1.default.Schema({
     width: {
         type: Number,
         required: true,
@@ -61,6 +53,16 @@ const OrderSchema = new mongoose_1.default.Schema({
         type: String,
         required: false,
     },
+}, { _id: false });
+const OrderSchema = new mongoose_1.default.Schema({
+    orderType: {
+        type: String,
+        required: true,
+    },
+    workName: {
+        type: String,
+        required: false,
+    },
     client: {
         type: String,
         required: true,
@@ -77,5 +79,6 @@ const OrderSchema = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
+    orderProps: OrderPropsSchema,
 }, { timestamps: true });
 exports.Order = mongoose_1.default.model("Order", OrderSchema);
